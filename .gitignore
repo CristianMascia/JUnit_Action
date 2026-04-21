@@ -1,0 +1,46 @@
+# --- Build artifacts ---------------------------------------------------
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+
+# --- Maven --------------------------------------------------------------
+.mvn/
+dependency-reduced-pom.xml
+
+# --- IDE: VSCode --------------------------------------------------------
+# Non versioniamo la configurazione locale dell'IDE: ognuno ha la sua.
+.vscode/
+*.code-workspace
+
+# --- IDE: IntelliJ IDEA -------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# --- IDE: Eclipse -------------------------------------------------------
+.project
+.classpath
+.settings/
+bin/
+
+# --- Logs ---------------------------------------------------------------
+*.log
+logs/
+
+# --- Report di test / coverage (si rigenerano in CI) --------------------
+surefire-reports/
+jacoco.exec
+jacoco-report/
+
+# --- SO ----------------------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# --- Credenziali (MAI committare!) --------------------------------------
+.env
+.env.*
+secrets.properties
