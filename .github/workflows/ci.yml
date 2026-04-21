@@ -1,3 +1,22 @@
+# ------------------------------------------------------------------------
+# Workflow di Continuous Integration per il progetto "esempio-carrello".
+#
+# Questo file viene letto automaticamente da GitHub ogni volta che:
+#   - viene fatto un push sul branch main
+#   - viene aperta o aggiornata una pull request verso main
+#
+# Al trigger, GitHub avvia una macchina virtuale Ubuntu pulita, installa
+# Java 11 (distribuzione Temurin = OpenJDK Adoptium), clona il repository
+# e lancia `mvn test`. Se anche un solo test JUnit fallisce, il job
+# termina con esito rosso e il check compare come "failed" nella UI
+# della pull request, impedendo (se configurato) il merge.
+#
+# Il report dei test viene pubblicato nella tab "Checks" della PR in
+# formato leggibile, mostrando quali test sono passati/falliti con
+# dettagli degli errori e durata di esecuzione.
+#
+# Il risultato si vede nella tab "Actions" del repository.
+# ------------------------------------------------------------------------
 name: CI
 
 on:
@@ -11,27 +30,30 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      checks: write        # <- permesso per creare check runs
-      pull-requests: write # <- per commentare nelle PR (opzionale)
+      checks: write        # permesso per creare check runs con i risultati
+      pull-requests: write # permesso per commentare nelle PR
     
     steps:
+      # Scarica il codice del repository nel runner
       - uses: actions/checkout@v4
       
+      # Installa JDK 11
       - name: Set up JDK 11
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'temurin'
-          cache: maven
+          cache: maven     # velocizza le run successive
       
+      # Compila ed esegue i test JUnit tramite Maven
       - name: Run tests
         run: mvn --batch-mode test
       
+      # Pubblica report dettagliato dei test nella tab Checks
       - name: Publish Test Report
         uses: dorny/test-reporter@v1
-        if: always()
+        if: always()  # esegue anche se i test falliscono
         with:
           name: Maven Tests
           path: target/surefire-reports/*.xml
           reporter: java-junit
-          fail-on-error: true
