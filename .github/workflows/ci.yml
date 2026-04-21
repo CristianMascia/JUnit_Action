@@ -17,7 +17,7 @@
 #
 # Il risultato si vede nella tab "Actions" del repository.
 # ------------------------------------------------------------------------
-name: CI
+name: Unit Tests CI
 
 on:
   push:
