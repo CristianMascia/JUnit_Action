@@ -9,6 +9,11 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write        # <- permesso per creare check runs
+      pull-requests: write # <- per commentare nelle PR (opzionale)
+    
     steps:
       - uses: actions/checkout@v4
       
@@ -22,10 +27,9 @@ jobs:
       - name: Run tests
         run: mvn --batch-mode test
       
-      # Genera report leggibile dai risultati Surefire
       - name: Publish Test Report
         uses: dorny/test-reporter@v1
-        if: always()  # esegue anche se i test falliscono
+        if: always()
         with:
           name: Maven Tests
           path: target/surefire-reports/*.xml
