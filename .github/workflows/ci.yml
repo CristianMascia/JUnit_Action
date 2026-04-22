@@ -1,22 +1,3 @@
-# ------------------------------------------------------------------------
-# Workflow di Continuous Integration per il progetto "esempio-carrello".
-#
-# Questo file viene letto automaticamente da GitHub ogni volta che:
-#   - viene fatto un push sul branch main
-#   - viene aperta o aggiornata una pull request verso main
-#
-# Al trigger, GitHub avvia una macchina virtuale Ubuntu pulita, installa
-# Java 11 (distribuzione Temurin = OpenJDK Adoptium), clona il repository
-# e lancia `mvn test`. Se anche un solo test JUnit fallisce, il job
-# termina con esito rosso e il check compare come "failed" nella UI
-# della pull request, impedendo (se configurato) il merge.
-#
-# Il report dei test viene pubblicato nella tab "Checks" della PR in
-# formato leggibile, mostrando quali test sono passati/falliti con
-# dettagli degli errori e durata di esecuzione.
-#
-# Il risultato si vede nella tab "Actions" del repository.
-# ------------------------------------------------------------------------
 name: Unit Tests CI
 
 on:
