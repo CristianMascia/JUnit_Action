@@ -16,14 +16,14 @@ public class Carrello {
         amount++;
     }
 
-    // public void removeOneProduct() {
-    //     amount--;
-    // }
-
     public void removeOneProduct() {
-        if (amount > 0) {
-            amount--;
-        }
+        amount--;
     }
+
+    // public void removeOneProduct() {
+    //     if (amount > 0) {
+    //         amount--;
+    //     }
+    // }
 
 }
